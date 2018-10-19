@@ -28,15 +28,13 @@ public class ParentProgramNodeService implements SwingProgramNodeService<ParentP
 
 	@Override
 	public ParentProgramNodeView createView(ViewAPIProvider apiProvider) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ParentProgramNodeView();
 	}
 
 	@Override
 	public ParentProgramNodeContribution createNode(ProgramAPIProvider apiProvider, ParentProgramNodeView view,
 			DataModel model, CreationContext context) {
-		// TODO Auto-generated method stub
-		return null;
+		return new ParentProgramNodeContribution(apiProvider, view);
 	}
 
 }
