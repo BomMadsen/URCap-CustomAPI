@@ -13,20 +13,17 @@ public class ChildProgramNodeService implements SwingProgramNodeService<ChildPro
 
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return "childNode";
 	}
 
 	@Override
 	public void configureContribution(ContributionConfiguration configuration) {
-		// TODO Auto-generated method stub
-		
+		configuration.setUserInsertable(false);
 	}
 
 	@Override
 	public String getTitle(Locale locale) {
-		// TODO Auto-generated method stub
-		return null;
+		return "MyChildNode";
 	}
 
 	@Override
