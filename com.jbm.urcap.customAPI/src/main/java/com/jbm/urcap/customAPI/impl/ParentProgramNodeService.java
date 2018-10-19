@@ -13,20 +13,17 @@ public class ParentProgramNodeService implements SwingProgramNodeService<ParentP
 
 	@Override
 	public String getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return "parentNode";
 	}
 
 	@Override
 	public void configureContribution(ContributionConfiguration configuration) {
-		// TODO Auto-generated method stub
-		
+		configuration.setChildrenAllowed(true);
 	}
 
 	@Override
 	public String getTitle(Locale locale) {
-		// TODO Auto-generated method stub
-		return null;
+		return "MyParentNode";
 	}
 
 	@Override
