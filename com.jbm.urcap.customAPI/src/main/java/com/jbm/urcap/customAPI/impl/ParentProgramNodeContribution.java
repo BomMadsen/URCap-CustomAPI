@@ -23,6 +23,8 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 	private final ParentProgramNodeView view;
 	private final UndoRedoManager undoRedoManager;
 	
+	private static String[] colors = {"Red", "Green", "Blue"};
+	
 	public ParentProgramNodeContribution(ProgramAPIProvider apiProvider, ParentProgramNodeView view) {
 		this.apiProvider = apiProvider;
 		this.view = view;
@@ -32,6 +34,12 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 	public void requestToAddChildNode() {
 		if(!childNodeAlreadyExists()) {
 			addChildNode();
+		}
+	}
+	
+	public void requestToReColorChildNode(String color) {
+		if(childNodeAlreadyExists()) {
+			setChildNodeColor(colorFromString(color));
 		}
 	}
 	
@@ -113,25 +121,30 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 	
 	@Override
 	public void openView() {
-		view.setImplementButtonEnabled(!childNodeAlreadyExists());
+		view.setColorComboBoxItems(colors);
+		
+		boolean childExists = childNodeAlreadyExists();
+		
+		view.setImplementButtonEnabled(!childExists);
+		view.setColorComboBoxEnabled(childExists);
+		
+		if(childExists) {
+			view.setColorComboBoxSelectedItem(stringFromColor(getChildNodeColor()));
+		}
 	}
 
 	@Override
 	public void closeView() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public String getTitle() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Parent Node";
 	}
 
 	@Override
 	public boolean isDefined() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -139,4 +152,24 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 		writer.writeChildren();
 	}
 
+	private Color colorFromString(String string) {
+		if(string.equals(colors[0])) {
+			return Color.RED;
+		} else if(string.equals(colors[1])) {
+			return Color.GREEN;
+		} else {
+			return Color.BLUE;
+		}
+	}
+	
+	private String stringFromColor(Color color) {
+		if(color.equals(Color.RED)) {
+			return colors[0];
+		} else if(color.equals(Color.GREEN)) {
+			return colors[1];
+		} else {
+			return colors[2];
+		}
+	}
+	
 }

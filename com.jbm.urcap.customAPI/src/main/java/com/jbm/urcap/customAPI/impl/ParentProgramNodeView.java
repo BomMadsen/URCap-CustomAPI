@@ -102,7 +102,7 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange()==ItemEvent.SELECTED) {
-					provider.get(); // TODO Call contribution
+					provider.get().requestToReColorChildNode((String) e.getItem());
 				}
 			}
 		});
