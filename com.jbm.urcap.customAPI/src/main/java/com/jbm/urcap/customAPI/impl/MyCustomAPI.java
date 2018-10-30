@@ -13,16 +13,30 @@ public interface MyCustomAPI {
 	 * 
 	 */
 	
+	public enum MyColor{
+		RED(Color.RED, "Red"),
+		GREEN(Color.GREEN, "Green"),
+		BLUE(Color.BLUE, "Blue");
+		
+		MyColor(Color color, String name){
+			this.color = color;
+			this.name= name;
+		}
+		
+		final Color color;
+		final String name;
+	}
+	
 	/*****
 	 * Method to get the Color of a URCapProgramNode implementing this interface
 	 * @return the Color the node has
 	 */
-	public Color getColor();
+	public MyColor getColor();
 	
 	/*****
 	 * Method to set the Color of a URCapProgramNode implementing this interface
 	 * @param color the Color of the node
 	 */
-	public void setColor(Color color);
+	public void setColor(MyColor color);
 	
 }
