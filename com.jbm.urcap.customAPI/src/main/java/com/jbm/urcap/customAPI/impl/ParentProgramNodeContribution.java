@@ -30,6 +30,7 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 	public void requestToAddChildNode() {
 		if(!childNodeAlreadyExists()) {
 			addChildNode();
+			openView();
 		}
 	}
 	

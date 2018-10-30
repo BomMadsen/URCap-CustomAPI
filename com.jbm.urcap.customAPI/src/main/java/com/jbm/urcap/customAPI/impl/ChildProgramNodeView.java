@@ -1,5 +1,7 @@
 package com.jbm.urcap.customAPI.impl;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
 import com.jbm.urcap.customAPI.impl.MyCustomAPI.MyColor;
@@ -13,6 +15,7 @@ public class ChildProgramNodeView implements SwingProgramNodeView<ChildProgramNo
 	@Override
 	public void buildUI(JPanel panel, ContributionProvider<ChildProgramNodeContribution> provider) {
 		
+		colorPanel.setPreferredSize(new Dimension(100, 100));
 		panel.add(colorPanel);
 		
 	}
