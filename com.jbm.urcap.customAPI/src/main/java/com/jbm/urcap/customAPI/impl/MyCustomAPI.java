@@ -25,6 +25,14 @@ public interface MyCustomAPI {
 		
 		final Color color;
 		final String name;
+		
+		String getName() {
+			return name;
+		}
+		
+		Color getColor() {
+			return color;
+		}
 	}
 	
 	/*****
