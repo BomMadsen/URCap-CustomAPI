@@ -13,6 +13,15 @@ public interface MyCustomAPI {
 	 * 
 	 */
 	
+	/*****
+	 * enum MyColor
+	 * This object is shared for Parent and Child. 
+	 * The parent can SET the MyColor in Child
+	 * The parent can GET the MyColor in Child
+	 * MyColor contains 3 enum elements: RED, GREEN and BLUE
+	 * Each object contains both a Color (java.awt) and String
+	 * 
+	 */
 	public enum MyColor{
 		RED(Color.RED, "Red"),
 		GREEN(Color.GREEN, "Green"),

@@ -72,6 +72,11 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 		return foundChild[0];
 	}
 	
+	/*****
+	 * Method to SET the MyColor of the Child node, using the URCap Custom API
+	 * The Child node must implement the MyCustomAPI interface in the Contribution
+	 * @param color the MyColor to set in the Child
+	 */
 	private void setChildNodeColor(final MyColor color) {
 		// Get the root-node (this program node)
 		TreeNode root = apiProvider.getProgramAPI().getProgramModel().getRootTreeNode(this);
@@ -88,11 +93,15 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 					// After "getAs" we can now call the interface methods 
 					programNode.getAs(MyCustomAPI.class).setColor(color);
 				}
-//				super.visit(programNode, index, depth);
 			}
 		});
 	}
 	
+	/*****
+	 * Method to GET the MyColor of the Child node, using the URCap Custom API
+	 * The Child node must implement the MyCustomAPI interface in the Contribution
+	 * @return the MyColor configured for the Child 
+	 */
 	private MyColor getChildNodeColor() {
 		final MyColor[] color = new MyColor[1];
 		// Get the root-node (this program node)
@@ -110,7 +119,6 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 					// After "getAs" we can now call the interface methods 
 					color[0] = programNode.getAs(MyCustomAPI.class).getColor();
 				}
-//				super.visit(programNode, index, depth);
 			}
 		});
 		return color[0];

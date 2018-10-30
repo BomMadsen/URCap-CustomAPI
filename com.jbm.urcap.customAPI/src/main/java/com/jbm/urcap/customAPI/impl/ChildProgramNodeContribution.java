@@ -1,7 +1,5 @@
 package com.jbm.urcap.customAPI.impl;
 
-import java.awt.Color;
-
 import com.ur.urcap.api.contribution.ProgramNodeContribution;
 import com.ur.urcap.api.contribution.program.ProgramAPIProvider;
 import com.ur.urcap.api.domain.data.DataModel;
@@ -9,6 +7,8 @@ import com.ur.urcap.api.domain.script.ScriptWriter;
 import com.ur.urcap.api.domain.undoredo.UndoRedoManager;
 import com.ur.urcap.api.domain.undoredo.UndoableChanges;
 
+// The ChildProgramNodeCOntribution implements the MyCustomAPI interface, 
+// and must hence override the methods inherited from this interface
 public class ChildProgramNodeContribution implements ProgramNodeContribution, MyCustomAPI {
 
 	private final ProgramAPIProvider apiProvider;
@@ -51,7 +51,9 @@ public class ChildProgramNodeContribution implements ProgramNodeContribution, My
 		writer.appendLine("popup(\"This is a "+getColor()+" Child node\", \"Child node popup\", blocking=True)");
 	}
 
-	// This method is overridden from the MyCustomAPI interface
+	/*****
+	 * Overriding the getColor() method to comply with the MyCustomAPI interface
+	 */
 	@Override
 	public MyColor getColor() {
 		String colorInModel = model.get(COLOR_KEY, DEFAULT_COLOR);
@@ -64,7 +66,9 @@ public class ChildProgramNodeContribution implements ProgramNodeContribution, My
 		}
 	}
 	
-	// This method is overridden from the MyCustomAPI interface
+	/*****
+	 * Overriding the setColor() method to comply with the MyCustomAPI interface
+	 */
 	@Override
 	public void setColor(final MyColor color) {
 		undoRedoManager.recordChanges(new UndoableChanges() {
