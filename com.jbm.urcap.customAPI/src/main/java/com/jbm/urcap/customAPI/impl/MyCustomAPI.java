@@ -26,11 +26,11 @@ public interface MyCustomAPI {
 		final Color color;
 		final String name;
 		
-		String getName() {
+		public String toString() {
 			return name;
 		}
 		
-		Color getColor() {
+		public Color getColor() {
 			return color;
 		}
 	}
