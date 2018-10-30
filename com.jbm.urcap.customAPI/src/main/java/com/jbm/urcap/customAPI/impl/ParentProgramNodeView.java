@@ -16,13 +16,14 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.jbm.urcap.customAPI.impl.MyCustomAPI.MyColor;
 import com.ur.urcap.api.contribution.ContributionProvider;
 import com.ur.urcap.api.contribution.program.swing.SwingProgramNodeView;
 
 public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgramNodeContribution>{
 
 	private JButton ImplementButton = new JButton();
-	private JComboBox<String> ColorCombo = new JComboBox<String>();
+	private JComboBox<MyColor> ColorCombo = new JComboBox<MyColor>();
 	
 	@Override
 	public void buildUI(JPanel panel, ContributionProvider<ParentProgramNodeContribution> provider) {
@@ -52,12 +53,13 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 		}
 	}
 	
-	public void setColorComboBoxItems(String[] items) {
+	public void setColorComboBoxItems(MyColor[] items) {
 		ColorCombo.removeAllItems();
-		ColorCombo.setModel(new DefaultComboBoxModel<String>(items));
+		// Since MyColor overrides "toString" we can use this object directly here
+		ColorCombo.setModel(new DefaultComboBoxModel<MyColor>(items));
 	}
 	
-	public void setColorComboBoxSelectedItem(String item) {
+	public void setColorComboBoxSelectedItem(MyColor item) {
 		ColorCombo.setSelectedItem(item);
 	}
 
@@ -87,7 +89,7 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 		return box;
 	}
 	
-	private Box createColorChooserComboBox(final JComboBox<String> combo,
+	private Box createColorChooserComboBox(final JComboBox<MyColor> combo,
 			final ContributionProvider<ParentProgramNodeContribution> provider) {
 		Box box = Box.createHorizontalBox();
 		box.setAlignmentX(Box.CENTER_ALIGNMENT);
@@ -102,7 +104,7 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange()==ItemEvent.SELECTED) {
-					provider.get().requestToReColorChildNode((String) e.getItem());
+					provider.get().requestToReColorChildNode((MyColor) e.getItem());
 				}
 			}
 		});

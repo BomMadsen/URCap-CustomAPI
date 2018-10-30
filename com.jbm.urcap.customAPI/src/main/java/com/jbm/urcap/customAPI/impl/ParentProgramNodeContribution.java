@@ -1,14 +1,10 @@
 package com.jbm.urcap.customAPI.impl;
 
-import java.awt.Color;
-
+import com.jbm.urcap.customAPI.impl.MyCustomAPI.MyColor;
 import com.ur.urcap.api.contribution.ProgramNodeContribution;
 import com.ur.urcap.api.contribution.program.ProgramAPIProvider;
-import com.ur.urcap.api.domain.ProgramAPI;
-import com.ur.urcap.api.domain.data.DataModel;
 import com.ur.urcap.api.domain.program.ProgramModel;
 import com.ur.urcap.api.domain.program.nodes.ProgramNodeFactory;
-import com.ur.urcap.api.domain.program.nodes.builtin.AssignmentNode;
 import com.ur.urcap.api.domain.program.nodes.contributable.URCapProgramNode;
 import com.ur.urcap.api.domain.program.structure.ProgramNodeVisitor;
 import com.ur.urcap.api.domain.program.structure.TreeNode;
@@ -23,7 +19,7 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 	private final ParentProgramNodeView view;
 	private final UndoRedoManager undoRedoManager;
 	
-	private static String[] colors = {"Red", "Green", "Blue"};
+	private static MyColor[] colors = {MyColor.RED, MyColor.GREEN, MyColor.BLUE};
 	
 	public ParentProgramNodeContribution(ProgramAPIProvider apiProvider, ParentProgramNodeView view) {
 		this.apiProvider = apiProvider;
@@ -37,9 +33,9 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 		}
 	}
 	
-	public void requestToReColorChildNode(String color) {
+	public void requestToReColorChildNode(MyColor color) {
 		if(childNodeAlreadyExists()) {
-			setChildNodeColor(colorFromString(color));
+			setChildNodeColor(color);
 		}
 	}
 	
@@ -75,7 +71,7 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 		return foundChild[0];
 	}
 	
-	private void setChildNodeColor(final Color color) {
+	private void setChildNodeColor(final MyColor color) {
 		// Get the root-node (this program node)
 		TreeNode root = apiProvider.getProgramAPI().getProgramModel().getRootTreeNode(this);
 		// Traverse the program tree, using the ProgramNodeVisitor
@@ -96,8 +92,8 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 		});
 	}
 	
-	private Color getChildNodeColor() {
-		final Color[] color = new Color[1];
+	private MyColor getChildNodeColor() {
+		final MyColor[] color = new MyColor[1];
 		// Get the root-node (this program node)
 		TreeNode root = apiProvider.getProgramAPI().getProgramModel().getRootTreeNode(this);
 		// Traverse the program tree, using the ProgramNodeVisitor
@@ -129,7 +125,7 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 		view.setColorComboBoxEnabled(childExists);
 		
 		if(childExists) {
-			view.setColorComboBoxSelectedItem(stringFromColor(getChildNodeColor()));
+			view.setColorComboBoxSelectedItem(getChildNodeColor());
 		}
 	}
 
@@ -150,26 +146,6 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 	@Override
 	public void generateScript(ScriptWriter writer) {
 		writer.writeChildren();
-	}
-
-	private Color colorFromString(String string) {
-		if(string.equals(colors[0])) {
-			return Color.RED;
-		} else if(string.equals(colors[1])) {
-			return Color.GREEN;
-		} else {
-			return Color.BLUE;
-		}
-	}
-	
-	private String stringFromColor(Color color) {
-		if(color.equals(Color.RED)) {
-			return colors[0];
-		} else if(color.equals(Color.GREEN)) {
-			return colors[1];
-		} else {
-			return colors[2];
-		}
 	}
 	
 }

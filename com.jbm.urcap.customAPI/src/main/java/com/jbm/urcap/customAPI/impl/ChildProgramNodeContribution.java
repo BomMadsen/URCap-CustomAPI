@@ -51,13 +51,13 @@ public class ChildProgramNodeContribution implements ProgramNodeContribution, My
 	}
 
 	@Override
-	public Color getColor() {
+	public MyColor getColor() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void setColor(Color color) {
+	public void setColor(MyColor color) {
 		// TODO Auto-generated method stub
 		
 	}
