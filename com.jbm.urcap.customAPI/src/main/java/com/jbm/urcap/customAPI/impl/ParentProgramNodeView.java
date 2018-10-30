@@ -13,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -29,14 +30,18 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 	public void buildUI(JPanel panel, ContributionProvider<ParentProgramNodeContribution> provider) {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
+		panel.add(createDescription("Push button to insert child node: "));
+		panel.add(createSpacer(10));
 		panel.add(createBuildChildTreeButtonBox(ImplementButton, provider));
 		panel.add(createSpacer(30));
+		panel.add(createDescription("Select the color of the child node: "));
+		panel.add(createSpacer(10));
 		panel.add(createColorChooserComboBox(ColorCombo, provider));
+		
 	}
 	
 	public void setImplementButtonEnabled(boolean enabled) {
 		ImplementButton.setEnabled(enabled);
-		// TODO Also toggle action listener
 		if(enabled) {
 			ImplementButton.setForeground(new Color(0,0,0));
 		} else {
@@ -66,10 +71,8 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 	private Box createBuildChildTreeButtonBox(final JButton button, 
 			final ContributionProvider<ParentProgramNodeContribution> provider) {
 		Box box = Box.createHorizontalBox();
-		box.setAlignmentX(Box.CENTER_ALIGNMENT);
-		
-		JLabel label = new JLabel("Push button to insert child node: ");
-		
+		box.setAlignmentX(Box.LEFT_ALIGNMENT);
+
 		button.setPreferredSize(new Dimension(161, 50));
 		button.setFocusable(false);
 		
@@ -83,7 +86,6 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 			}
 		});
 		
-		box.add(label);
 		box.add(button);
 		
 		return box;
@@ -92,9 +94,7 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 	private Box createColorChooserComboBox(final JComboBox<MyColor> combo,
 			final ContributionProvider<ParentProgramNodeContribution> provider) {
 		Box box = Box.createHorizontalBox();
-		box.setAlignmentX(Box.CENTER_ALIGNMENT);
-		
-		JLabel label = new JLabel("Select the color of the child node");
+		box.setAlignmentX(Box.LEFT_ALIGNMENT);
 		
 		combo.setPreferredSize(new Dimension(104, 30));
 		combo.setMaximumSize(combo.getPreferredSize());
@@ -109,9 +109,18 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 			}
 		});
 		
-		box.add(label);
 		box.add(combo);
 		
+		return box;
+	}
+	
+	private Box createDescription(String description) {
+		Box box = Box.createHorizontalBox();
+		box.setAlignmentX(Box.LEFT_ALIGNMENT);
+		
+		JLabel label = new JLabel(description);
+		
+		box.add(label);
 		return box;
 	}
 	
