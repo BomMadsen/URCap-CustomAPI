@@ -29,9 +29,14 @@ public class ParentProgramNodeContribution implements ProgramNodeContribution{
 		this.undoRedoManager = this.apiProvider.getProgramAPI().getUndoRedoManager();
 	}
 	
+	public void requestToAddChildNode() {
+		if(!childNodeAlreadyExists()) {
+			addChildNode();
+		}
+	}
+	
 	private void addChildNode() {
-		ProgramAPI programAPI = apiProvider.getProgramAPI();
-		ProgramModel programModel = programAPI.getProgramModel();
+		ProgramModel programModel = apiProvider.getProgramAPI().getProgramModel();
 		final ProgramNodeFactory nf = programModel.getProgramNodeFactory();
 		final TreeNode root = programModel.getRootTreeNode(this);
 		undoRedoManager.recordChanges(new UndoableChanges() {

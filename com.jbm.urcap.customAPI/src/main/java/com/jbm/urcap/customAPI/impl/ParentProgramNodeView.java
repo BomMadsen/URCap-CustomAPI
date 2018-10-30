@@ -77,7 +77,7 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				provider.get();	// TODO Call event in Contribution
+				provider.get().requestToAddChildNode();
 			}
 		});
 		
