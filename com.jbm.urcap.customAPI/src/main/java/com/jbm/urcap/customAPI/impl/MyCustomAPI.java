@@ -13,8 +13,16 @@ public interface MyCustomAPI {
 	 * 
 	 */
 	
+	/*****
+	 * Method to get the Color of a URCapProgramNode implementing this interface
+	 * @return the Color the node has
+	 */
 	public Color getColor();
 	
+	/*****
+	 * Method to set the Color of a URCapProgramNode implementing this interface
+	 * @param color the Color of the node
+	 */
 	public void setColor(Color color);
 	
 }
