@@ -1,6 +1,7 @@
 package com.jbm.urcap.customAPI.impl;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,6 +60,10 @@ public class ParentProgramNodeView implements SwingProgramNodeView<ParentProgram
 		box.add(button);
 		
 		return box;
+	}
+	
+	private Component createSpacer(int height) {
+		return Box.createRigidArea(new Dimension(0, height));
 	}
 	
 }
