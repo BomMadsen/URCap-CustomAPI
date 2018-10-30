@@ -1,9 +1,8 @@
 package com.jbm.urcap.customAPI.impl;
 
-import java.awt.Color;
-
 import javax.swing.JPanel;
 
+import com.jbm.urcap.customAPI.impl.MyCustomAPI.MyColor;
 import com.ur.urcap.api.contribution.ContributionProvider;
 import com.ur.urcap.api.contribution.program.swing.SwingProgramNodeView;
 
@@ -18,8 +17,8 @@ public class ChildProgramNodeView implements SwingProgramNodeView<ChildProgramNo
 		
 	}
 
-	public void pdateColor(Color color) {
-		colorPanel.setBackground(color);
+	public void updateColor(MyColor color) {
+		colorPanel.setBackground(color.getColor());
 	}
 	
 }

@@ -6,60 +6,74 @@ import com.ur.urcap.api.contribution.ProgramNodeContribution;
 import com.ur.urcap.api.contribution.program.ProgramAPIProvider;
 import com.ur.urcap.api.domain.data.DataModel;
 import com.ur.urcap.api.domain.script.ScriptWriter;
+import com.ur.urcap.api.domain.undoredo.UndoRedoManager;
+import com.ur.urcap.api.domain.undoredo.UndoableChanges;
 
 public class ChildProgramNodeContribution implements ProgramNodeContribution, MyCustomAPI {
 
 	private final ProgramAPIProvider apiProvider;
 	private final ChildProgramNodeView view;
 	private final DataModel model;
+	private final UndoRedoManager undoRedoManager;
+	
+	private static final String COLOR_KEY = "colorKey";
+	private static final String DEFAULT_COLOR = MyColor.RED.toString();
 	
 	public ChildProgramNodeContribution(ProgramAPIProvider apiProvider, ChildProgramNodeView view,
 			DataModel model) {
 		this.apiProvider = apiProvider;
 		this.view = view;
 		this.model = model;
+		this.undoRedoManager = this.apiProvider.getProgramAPI().getUndoRedoManager();
 	}
 	
 	@Override
 	public void openView() {
-		// TODO Auto-generated method stub
-		
+		view.updateColor(getColor());
 	}
 
 	@Override
 	public void closeView() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public String getTitle() {
-		// TODO Auto-generated method stub
-		return null;
+		return getColor().toString()+" Child node";
 	}
 
 	@Override
 	public boolean isDefined() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void generateScript(ScriptWriter writer) {
-		// TODO Auto-generated method stub
-		
+		writer.appendLine("popup(\"This is a "+getColor()+" Child node\", \"Child node popup\", blocking=True)");
 	}
 
+	// This method is overridden from the MyCustomAPI interface
 	@Override
 	public MyColor getColor() {
-		// TODO Auto-generated method stub
-		return null;
+		String colorInModel = model.get(COLOR_KEY, DEFAULT_COLOR);
+		if(colorInModel.equals(MyColor.RED.toString())) {
+			return MyColor.RED;
+		} else if(colorInModel.equals(MyColor.GREEN.toString())) {
+			return MyColor.GREEN;
+		} else {
+			return MyColor.BLUE;
+		}
 	}
-
+	
+	// This method is overridden from the MyCustomAPI interface
 	@Override
-	public void setColor(MyColor color) {
-		// TODO Auto-generated method stub
-		
+	public void setColor(final MyColor color) {
+		undoRedoManager.recordChanges(new UndoableChanges() {
+			
+			@Override
+			public void executeChanges() {
+				model.set(COLOR_KEY, color.toString());
+			}
+		});
 	}
 
 }
